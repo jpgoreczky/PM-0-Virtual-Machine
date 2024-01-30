@@ -11,9 +11,9 @@ Kyutza Lopez-Herera
 #define ARRAY_SIZE 500
 
 // Instructions
-#define RTN 0   // Return
 #define LIT 1   // Literal
 #define OPR 2   // Operation
+#define RTN 2   // Return
 #define LOD 3   // Load
 #define STO 4   // Store
 #define CAL 5   // Call Procedure
@@ -63,6 +63,7 @@ int main() {
     FILE *fp;
     Instruction IR; // instruction register
     char opcode[3];
+    
 
     // Initial values for PM/0 CPU registers
     int BP = 499;                   // base pointer
@@ -75,7 +76,19 @@ int main() {
         pas[i] = 0;
     }
 
-    fp = fopen ("input", "r");
+    fp = fopen ("input.txt", "r");
+
+    // Fetch Cycle
+    while(!feof(fp)) {
+        pas[PC] = IR.op;
+        pas[PC+1] = IR.l;
+        pas[PC+2] = IR.m;
+        PC += 3;
+    }
+
+    // Reset PC
+    PC = 0;
+    
 
     // read instructions
 
