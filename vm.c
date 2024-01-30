@@ -57,6 +57,11 @@ int base (int BP, int L) {
 }
 
 // print functions: stack, instructions
+void print(Instruction IR) {
+    for (int i = 0; i < 60; i +=3) {
+        printf("%d %d %d\n", pas[i], pas[i+1], pas[i+2]);
+    }
+}
 
 
 int main() {
@@ -64,6 +69,8 @@ int main() {
     Instruction IR; // instruction register
     char opcode[3];
     
+    fp = fopen ("input.txt", "r");
+  
 
     // Initial values for PM/0 CPU registers
     int BP = 499;                   // base pointer
@@ -76,18 +83,20 @@ int main() {
         pas[i] = 0;
     }
 
-    fp = fopen ("input.txt", "r");
-
+    
     // Fetch Cycle
-    while(!feof(fp)) {
+    while(fscanf(fp, "%d %d %d", &IR.op, &IR.l, &IR.m) != EOF) {
         pas[PC] = IR.op;
-        pas[PC+1] = IR.l;
+        pas[PC+1] = IR.l; 
         pas[PC+2] = IR.m;
         PC += 3;
     }
+    fclose(fp);
 
     // Reset PC
     PC = 0;
+
+    // print(IR);
     
 
     // read instructions
