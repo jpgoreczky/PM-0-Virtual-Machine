@@ -1,9 +1,3 @@
-/*
-GROUP MEMBERS:
-Josie Goreczky
-Kyutza Lopez-Herrera
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
